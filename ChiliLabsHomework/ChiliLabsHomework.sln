@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiliLabsHomework", "ChiliLabsHomework.csproj", "{5FE1E073-EDE3-4B30-975A-FB3009D6A160}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FE1E073-EDE3-4B30-975A-FB3009D6A160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE1E073-EDE3-4B30-975A-FB3009D6A160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE1E073-EDE3-4B30-975A-FB3009D6A160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE1E073-EDE3-4B30-975A-FB3009D6A160}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5D7F473-397B-4266-8E9B-1FFD02BE6ED1}
+	EndGlobalSection
+EndGlobal
