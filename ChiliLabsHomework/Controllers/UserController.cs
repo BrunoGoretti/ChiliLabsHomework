@@ -2,11 +2,10 @@
 
 namespace ChiliLabsHomework.Controllers
 {
-    public class UserController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+      
     }
 }
