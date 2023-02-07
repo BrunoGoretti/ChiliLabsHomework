@@ -1,9 +1,10 @@
-﻿using ChiliLabsHomework.Controllers;
+﻿using Ajax;
+using ChiliLabsHomework.Controllers;
 
 namespace ChiliLabsHomework.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<string> Registration(string identifier, string password);
+        JSend Registration(string nickname, string password);
     }
 }
