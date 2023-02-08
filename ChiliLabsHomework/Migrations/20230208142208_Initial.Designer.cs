@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChiliLabsHomework.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20230207150942_Initial")]
+    [Migration("20230208142208_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,7 +33,6 @@ namespace ChiliLabsHomework.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("AvatarUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nickname")
@@ -43,6 +42,14 @@ namespace ChiliLabsHomework.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("UserId");
 

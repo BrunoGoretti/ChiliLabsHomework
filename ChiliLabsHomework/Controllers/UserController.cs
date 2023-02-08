@@ -20,5 +20,12 @@ namespace ChiliLabsHomework.Controllers
             var registration = _userService.Registration(nickname, password);
             return Ok(registration);
         }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult> Login(string nickname, string password)
+        {
+            var login = _userService.Login(nickname, password);
+            return Ok(login);
+        }
     }
 }
