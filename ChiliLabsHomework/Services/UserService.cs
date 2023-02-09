@@ -35,7 +35,6 @@ namespace ChiliLabsHomework.Services
             UserModel user = new UserModel
             {
                 Nickname = nickname,
-                Password = password,
             };
 
             // Hash and salt the password
