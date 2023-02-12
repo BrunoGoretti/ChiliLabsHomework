@@ -2,6 +2,7 @@ using ChiliLabsHomework.Data;
 using ChiliLabsHomework.Services;
 using ChiliLabsHomework.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,13 @@ builder.Services.AddDbContext<UserContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddDbContext<AvatarContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAvatarService, AvatarService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
