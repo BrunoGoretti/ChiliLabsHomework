@@ -9,9 +9,9 @@ namespace ChiliLabsHomework.Services
 {
     public class AvatarService : IAvatarService
     {
-        private readonly UserContext _context;
+        private readonly ApiContext _context;
 
-        public AvatarService(UserContext context)
+        public AvatarService(ApiContext context)
         {
             _context = context;
         }

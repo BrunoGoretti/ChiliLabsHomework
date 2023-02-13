@@ -16,9 +16,9 @@ namespace ChiliLabsHomework.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserContext _context;
+        private readonly ApiContext _context;
 
-        public UserService(UserContext context)
+        public UserService(ApiContext context)
         {
             _context = context;
         }
@@ -106,7 +106,8 @@ namespace ChiliLabsHomework.Services
             }
 
             var token = GenerateTokenForUser(user);
-            return JSend.Success(new { Token = token });
+            return JSend.Success(new { Token = token, Nickname = user.Nickname, DefaultAvatar = user.AvatarUrl });
+            //return JSend.Success(new { Token = token });
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -133,7 +134,9 @@ namespace ChiliLabsHomework.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                new Claim(ClaimTypes.Name, user.Nickname)
+                new Claim(ClaimTypes.Name, user.Nickname),
+                new Claim("Nickname", user.Nickname),
+                new Claim("DefaultAvatar", user.AvatarUrl)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

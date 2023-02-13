@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChiliLabsHomework.Data
 {
-    public class UserContext : DbContext
+    public class ApiContext : DbContext
     {
-        public UserContext(DbContextOptions<UserContext> options)
+        public ApiContext(DbContextOptions<ApiContext> options)
         : base(options) { }
         public DbSet<UserModel> DbUsers { get; set; }
     }
