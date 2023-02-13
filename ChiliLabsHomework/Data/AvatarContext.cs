@@ -7,6 +7,6 @@ namespace ChiliLabsHomework.Data
     {
         public AvatarContext(DbContextOptions<AvatarContext> avatarOptions)
         : base(avatarOptions) { }
-        public DbSet<AvatarModel> Avatars { get; set; }
+        public DbSet<AvatarModel> DbAvatar { get; set; }
     }
 }
