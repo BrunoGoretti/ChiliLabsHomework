@@ -7,7 +7,7 @@ namespace ChiliLabsHomework.Services.Interfaces
 {
     public interface IUserService
     {
-        JSend Registration([FromBody] RegistrationRequestModel login);
-        JSend Login([FromBody] LoginRequestModel login);
+        JSend Registration([FromBody] RegistrationRequestModel request);
+        JSend Login([FromBody] LoginRequestModel request);
     }
 }

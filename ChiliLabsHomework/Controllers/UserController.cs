@@ -16,17 +16,17 @@ namespace ChiliLabsHomework.Controllers
         }
 
         [HttpPost("Registration")]
-        public async Task<ActionResult> Registration([FromBody] RegistrationRequestModel login)
+        public async Task<ActionResult> Registration([FromBody] RegistrationRequestModel request)
         {
-            var registration = _userService.Registration(login);
+            var registration = _userService.Registration(request);
             return Ok(registration);
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> Login([FromBody] LoginRequestModel login)
+        public async Task<ActionResult> Login(LoginRequestModel request)
         {
-            var result = _userService.Login(login);
-            return Ok(result);
+            var login = _userService.Login(request);
+            return Ok(login);
         }
     }
 }
