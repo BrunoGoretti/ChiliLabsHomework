@@ -23,10 +23,10 @@ namespace ChiliLabsHomework.Services
             _context = context;
         }
 
-        public JSend Registration(string nickname, string password)
+        public JSend Registration(RegistrationRequestModel login)
         {
             // Check if the specified nickname already exists in the database
-            if (_context.DbUsers.Any(u => u.Nickname == nickname))
+            if (_context.DbUsers.Any(u => u.Nickname == login.Login))
             {
                 return JSend.Error("The specified nickname is already in use. Please choose another one.");
             }
@@ -34,11 +34,11 @@ namespace ChiliLabsHomework.Services
             // Create a new User object with the specified nickname and password
             UserModel user = new UserModel
             {
-                Nickname = nickname,
+                Nickname = login.Login,
             };
 
             // Hash and salt the password
-            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash(login.Password, out byte[] passwordHash, out byte[] passwordSalt);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
@@ -47,7 +47,7 @@ namespace ChiliLabsHomework.Services
             _context.SaveChanges();
 
             // Generate a JWT token for the newly registered user
-            string token = GenerateHandlerToken(user.UserId, nickname);
+            string token = GenerateHandlerToken(user.UserId, login.Login);
 
             // Return a JSend success response with the generated token
             return JSend.Success(new { token });
@@ -91,16 +91,15 @@ namespace ChiliLabsHomework.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-
-        public JSend Login(string identifier, string password)
+        public JSend Login(LoginRequestModel login)
         {
-            var user = _context.DbUsers.FirstOrDefault(u => u.Nickname == identifier);
+            var user = _context.DbUsers.FirstOrDefault(u => u.Nickname == login.Login);
             if (user == null)
             {
                 return JSend.Error("User not found.");
             }
 
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            if (!VerifyPasswordHash(login.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return JSend.Error("Incorrect password.");
             }
@@ -135,8 +134,8 @@ namespace ChiliLabsHomework.Services
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                 new Claim(ClaimTypes.Name, user.Nickname),
-                new Claim("Nickname", user.Nickname),
-                new Claim("DefaultAvatar", user.AvatarUrl)
+                new Claim("User", user.Nickname),
+                new Claim("AvatarUrl", user.AvatarUrl)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

@@ -1,4 +1,5 @@
-﻿using ChiliLabsHomework.Services.Interfaces;
+﻿using ChiliLabsHomework.Models;
+using ChiliLabsHomework.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChiliLabsHomework.Controllers
@@ -15,17 +16,17 @@ namespace ChiliLabsHomework.Controllers
         }
 
         [HttpPost("Registration")]
-        public async Task<ActionResult> Registration(string nickname, string password)
+        public async Task<ActionResult> Registration([FromBody] RegistrationRequestModel login)
         {
-            var registration = _userService.Registration(nickname, password);
+            var registration = _userService.Registration(login);
             return Ok(registration);
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(string nickname, string password)
+        public async Task<ActionResult> Login([FromBody] LoginRequestModel login)
         {
-            var login = _userService.Login(nickname, password);
-            return Ok(login);
+            var result = _userService.Login(login);
+            return Ok(result);
         }
     }
 }

@@ -18,9 +18,9 @@ namespace ChiliLabsHomework.Controllers
         }
 
         [HttpPost("Upload")]
-        public IActionResult UploadAvatar(int userId, IFormFile avatar)
+        public IActionResult UploadAvatar(string nickname, IFormFile avatar)
         {
-            var result = _avatarService.UploadAvatar(userId, avatar);
+            var result = _avatarService.UploadAvatar(nickname, avatar);
             if (result.status == "success")
             {
                 return Ok(result.data);

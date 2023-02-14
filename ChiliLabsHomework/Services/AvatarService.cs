@@ -16,9 +16,9 @@ namespace ChiliLabsHomework.Services
             _context = context;
         }
 
-        public JSend UploadAvatar(int userId, IFormFile avatar)
+        public JSend UploadAvatar(string nickname, IFormFile avatar)
         {
-            var user = _context.DbUsers.FirstOrDefault(u => u.UserId == userId);
+            var user = _context.DbUsers.FirstOrDefault(u => u.Nickname == nickname);
             if (user == null)
             {
                 return JSend.Error("User not found.");
@@ -34,13 +34,13 @@ namespace ChiliLabsHomework.Services
                 return JSend.Error("Invalid image format.");
             }
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/avatars", userId + Path.GetExtension(avatar.FileName));
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/avatars", nickname + Path.GetExtension(avatar.FileName));
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 avatar.CopyTo(stream);
             }
 
-            user.AvatarUrl = "/avatars/" + userId + Path.GetExtension(avatar.FileName);
+            user.AvatarUrl = "/avatars/" + nickname + Path.GetExtension(avatar.FileName);
             _context.SaveChanges();
 
             return JSend.Success(new { AvatarUrl = user.AvatarUrl });

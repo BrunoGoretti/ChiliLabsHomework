@@ -4,6 +4,6 @@ namespace ChiliLabsHomework.Services.Interfaces
 {
     public interface IAvatarService
     {
-        JSend UploadAvatar(int userId, IFormFile avatar);
+        JSend UploadAvatar(string nickname, IFormFile avatar);
     }
 }
